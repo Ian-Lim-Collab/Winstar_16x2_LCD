@@ -16,9 +16,7 @@
 
 class Winstar_16x2_LCD{
     public:
-        Winstar_16x2_LCD(   PinName RW_pin,
-                            PinName RS_pin,
-                            PinName EN_pin,
+        Winstar_16x2_LCD(   
                             PinName DB_0_pin,
                             PinName DB_1_pin,
                             PinName DB_2_pin,
@@ -27,13 +25,20 @@ class Winstar_16x2_LCD{
                             PinName DB_5_pin,
                             PinName DB_6_pin,
                             PinName DB_7_pin
+                            PinName EN_pin,
+                            PinName RS_pin
+                            #ifdef RW_ENABLE
+                                ,PinName RW_pin
+                            #endif
                         );
         void WriteIns(uint8_t instruction);
         int WriteData(uint8_t data);
         int WriteString(string msg);
         int WriteLine0(string msg);
         int WriteLine1(String msg);
-        int CheckBusy();
+        #ifdef RW_ENABLE
+            void CheckBusy();
+        #endif
     protected:
         const uint8_t SET_8BIT_INTERFACE_CMD    = 0x38;
         const uint8_t DISP_ON_CMD               = 0x0C;

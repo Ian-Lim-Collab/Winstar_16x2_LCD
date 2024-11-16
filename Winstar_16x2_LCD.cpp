@@ -10,8 +10,10 @@ Winstar_16x2_LCD::Winstar_16x2_LCD(
     PinName DB_6_pin,
     PinName DB_7_pin
     PinName EN_pin,
-    PinName RS_pin,
-    PinName RW_pin = NC,
+    PinName RS_pin
+    #ifdef RW_ENABLE
+        ,PinName RW_pin = NC,
+    #endif
 ) :lcd_bus(
     DB_0_pin,
     DB_1_pin,
@@ -22,8 +24,10 @@ Winstar_16x2_LCD::Winstar_16x2_LCD(
     DB_6_pin,
     DB_7_pin,
     EN_pin,
-    RS_pin,
-    RW_pin,
+    RS_pin
+    #ifdef RW_ENABLE
+        ,RW_pin
+    #endif
     ){
     this->WriteIns(SET_8BIT_INTERFACE_CMD);
     this->WriteIns(SET_8BIT_INTERFACE_CMD);
